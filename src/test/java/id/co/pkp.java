@@ -184,4 +184,32 @@ public class pkp {
         browser.close();
         playwright.close();
     }
+
+    @Test
+    @DisplayName("Navigate to URL")
+    public void NavigatetoURLTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("http://autopract.com/selenium/upload1/");
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Refresh Page")
+    public void RefreshPage() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("http://autopract.com/selenium/popup/");
+        page.reload();
+        page.locator("//a[normalize-space()='JQuery Popup Model']").click();
+        String textContent = page.locator("//p[normalize-space()='This is Sample Popup.']").textContent();
+        System.out.println(textContent);
+        page.close();
+        browser.close();
+        playwright.close();
+    }
 }
