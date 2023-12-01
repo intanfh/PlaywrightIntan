@@ -167,4 +167,21 @@ public class pkp {
         browser.close();
         playwright.close();
     }
+
+    @Test
+    @DisplayName("Click Browser Back and Forward Button")
+    public void ClickBrowserBackandForwardButton() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("https://www.programsbuzz.com");
+        page.locator("#edit-submit--3").click();
+        page.locator("//input[@id='edit-keys']").type("Playwright");
+        page.locator("//input[@id='edit-submit']").click();
+        page.goBack();
+        page.goForward();
+        page.close();
+        browser.close();
+        playwright.close();
+    }
 }
