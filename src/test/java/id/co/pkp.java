@@ -3,6 +3,7 @@ package id.co;
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 public class pkp {
@@ -128,6 +129,22 @@ public class pkp {
         } else {
             System.out.println("Not a match!!");
         }
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("AssertTextOnWebPageTest")
+    public void AssertTextOnWebPageTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("http://www.programsbuzz.com");
+        Locator body = page.locator("body");
+        String bodyText = body.textContent();
+        Assert.assertFalse(bodyText.contains("Spam Message"), "Spam Text Not Found!!");
+
         page.close();
         browser.close();
         playwright.close();
