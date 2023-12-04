@@ -289,6 +289,27 @@ public class pkp {
         page.navigate("https://www.programsbuzz.com/search/node?keys=playwright+java");
         List<String> allTextContents = listEle.allTextContents();
         System.out.println(allTextContents);
+        allTextContents.forEach(System.out::println);
+
+        for (int i = 0; i < allTextContents.size(); i++) {
+            System.out.println(i + 1 + "." + allTextContents.get(i));
+        }
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("XPath Selector")
+    public void XPathSelector() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+
+        page.navigate("https://www.programsbuzz.com/user/login");
+        page.locator("//input[@id= 'edit-name']").type("Naruto");
+        page.locator("//input[@id= 'edit-pass']").type("Sasskeh");
 
         page.close();
         browser.close();
