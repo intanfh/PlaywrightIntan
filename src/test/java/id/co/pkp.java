@@ -314,6 +314,7 @@ public class pkp {
 
         page.navigate("https://www.programsbuzz.com");
         String textContent = page.locator("div.container-fluid ul li >> nth=6").textContent();
+        System.out.println(textContent);
 
         page.close();
         browser.close();
@@ -328,6 +329,24 @@ public class pkp {
         Page page = browser.newPage();
         page.navigate("http://autopract.com/selenium/dropdown1/");
         page.selectOption(".custom-select", "item2");
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Dynamic Dropdown")
+    public void DynamicDorpdown() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("http://autopract.com/selenium/dropdown4/");
+        page.locator("//span[@class='caret']").click();
+        Locator countries = page.locator("//div[@role='combobox']");
+        List<String> allInnerTexts = countries.allInnerTexts();
+
+        allInnerTexts.forEach(System.out::println);
 
         page.close();
         browser.close();
