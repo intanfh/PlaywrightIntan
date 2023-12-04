@@ -312,6 +312,23 @@ public class pkp {
         page.locator("//input[@id= 'edit-pass']").type("Sasskeh");
         page.locator("//input[@id= 'edit-submit']").click();
 
+        page.navigate("https://www.programsbuzz.com");
+        String textContent = page.locator("div.container-fluid ul li >> nth=6").textContent();
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Handle Dropdown")
+    public void HandleDropdown() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("http://autopract.com/selenium/dropdown1/");
+        page.selectOption(".custom-select", "item2");
+
         page.close();
         browser.close();
         playwright.close();
