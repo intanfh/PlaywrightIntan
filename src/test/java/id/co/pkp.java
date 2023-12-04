@@ -379,4 +379,28 @@ public class pkp {
         browser.close();
         playwright.close();
     }
+
+    @Test
+    @DisplayName("Check and Uncheck Checkbox")
+    public void CheckAndUncheckCheckboxTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+
+        //Using click
+        page.navigate("http://autopract.com/selenium/form5//");
+        page.locator("//input[@value='two']").click();
+
+        //Using Check
+        page.navigate("http://autopract.com/selenium/form5//");
+        page.locator("//input[@value='four']").check();
+
+        //Using Uncheck
+        page.navigate("http://autopract.com/selenium/form5//");
+        page.locator("//input[@value='four']").check();
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
 }
