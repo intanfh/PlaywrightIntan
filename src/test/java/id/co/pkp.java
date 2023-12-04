@@ -1,5 +1,6 @@
 package id.co;
 
+import com.microsoft.playwright.Dialog;
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -488,9 +489,7 @@ public class pkp {
         Page page = newContext.newPage();
 
         page.navigate("http://autopract.com/selenium/alert5/");
-        page.onDialog(dialog -> {
-            dialog.accept();
-        });
+        page.onDialog(Dialog::accept);
 
         page.locator("#alert-button").click();
         newContext.close();
