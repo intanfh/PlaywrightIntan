@@ -310,6 +310,7 @@ public class pkp {
         page.navigate("https://www.programsbuzz.com/user/login");
         page.locator("//input[@id= 'edit-name']").type("Naruto");
         page.locator("//input[@id= 'edit-pass']").type("Sasskeh");
+        page.locator("//input[@id= 'edit-submit']").click();
 
         page.close();
         browser.close();
