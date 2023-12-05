@@ -8,7 +8,10 @@ import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import java.awt.*;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -556,5 +559,36 @@ public class pkp {
         page.close();
         browser.close();
         playwright.close();
+    }
+
+    @Test
+    @DisplayName("Take Screenshot")
+    public void takeScreenshotTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("http://autopract.com/selenium/upload1");
+        LocalDateTime dateTime = LocalDateTime.now();
+        String tanggal = dateTime.format(DateTimeFormatter.ofPattern("ddMMuuuu_HHmmss"));
+        System.out.println(tanggal);
+        Path screenshotPath = Paths.get("TEST1_" + tanggal + ".jpg");
+        page.screenshot(new Page.ScreenshotOptions().setPath(screenshotPath).setFullPage(true));
+
+        Path screenshotPath2 = Paths.get("TEST2_" + tanggal + ".jpg");
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Record Video")
+    public void recordVideo() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        BrowserContext newContext = browser.newContext(new Browser.NewContextOptions().
+                setRecordVideoDir(Paths.get("Videos")).setRecordVideoSize(1280, 720);
+        Page page = browser.newPage();
+
     }
 }
