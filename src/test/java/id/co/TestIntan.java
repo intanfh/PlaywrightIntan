@@ -29,10 +29,6 @@ public class TestIntan {
     }
 
     @Test
-    @DisplayName("Test Login Negative Password")
-    public void Login
-
-    @Test
     @DisplayName("Test Login Negative Username")
     public void LoginNegativeUsernameTest() {
         Playwright playwright = Playwright.create();
