@@ -26,6 +26,25 @@ public class TestIntan {
         page.close();
         browser.close();
         playwright.close();
+    }
 
+    @Test
+    @DisplayName("Test Login Negative Password")
+    public void Login
+
+    @Test
+    @DisplayName("Test Login Negative Username")
+    public void LoginNegativeUsernameTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("https://practicetestautomation.com/practice-test-login/");
+        page.locator("#username").type("incorrectUser");
+        page.locator("#password").type("Password123");
+        page.locator("#submit").click();
+
+        page.close();
+        browser.close();
+        playwright.close();
     }
 }
