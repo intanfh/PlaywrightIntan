@@ -43,4 +43,22 @@ public class TestIntan {
         browser.close();
         playwright.close();
     }
+
+    @Test
+    @DisplayName("Test Login Negative Password")
+    public void LoginNegativePasswordTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("https://practicetestautomation.com/practice-test-login/");
+        page.locator("#username").type("student");
+        page.locator("#password").type("incorrectPassword");
+        page.locator("#submit").click();
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions()
+                .setName("submit")).last().click();
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
 }
