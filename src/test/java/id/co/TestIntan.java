@@ -61,4 +61,17 @@ public class TestIntan {
         playwright.close();
     }
 
+    @Test
+    @DisplayName("Test Add Row")
+    public void AddRowTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("https://practicetestautomation.com/practice-test-exceptions/");
+        page.locator("#add_btn").click();
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
 }
