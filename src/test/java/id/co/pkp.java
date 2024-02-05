@@ -263,7 +263,7 @@ public class pkp {
         Locator listEle3 = page.locator("//h3[@class='search-result__title']");
         listEle3.last().click();
 
-        //Find the last element using nth method
+        //Find the  element using nth method
         page.navigate("https://www.programsbuzz.com/search/node?keys=playwright+java");
         Locator listEle4 = page.locator("//h3[@class='search-result__title']");
         listEle4.nth(-1).click();
@@ -597,5 +597,23 @@ public class pkp {
         newContext.close();
         playwright.close();
 
+    }
+
+    @Test
+    @DisplayName("Download file in playwright")
+    public void downloadFileTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("http://demo.automationtesting.in/FileDownload.html");
+        Download waitForDownload = page.waitForDownload(page.locator("a.btn.btn-primary")::click);
+        waitForDownload.saveAs(Paths.get("C:\\Users\\Asus\\Downloads", waitForDownload.suggestedFilename()));
+
+        System.out.println(waitForDownload.url());
+        System.out.println(waitForDownload.page().title());
+        System.out.println(waitForDownload.path().toString());
+        page.close();
+        browser.close();
+        playwright.close();
     }
 }

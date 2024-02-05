@@ -74,4 +74,20 @@ public class TestIntan {
         playwright.close();
     }
 
+    @Test
+    @DisplayName("ElementNotInteractableException")
+    public void ElementNotInteractableException() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("https://practicetestautomation.com/practice-test-exceptions/");
+        page.locator("#add_btn").click();
+        page.getByLabel("row_input").fill("Makanan");
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions()
+                .setName("Save")).last().click();
+        page.close();
+        browser.close();
+        playwright.close();
+
+    }
 }
