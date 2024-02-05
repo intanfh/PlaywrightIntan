@@ -616,4 +616,18 @@ public class pkp {
         browser.close();
         playwright.close();
     }
+
+    @Test
+    @DisplayName("Upload File in Playwright Java")
+    public void uploadFileTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("http://autopract.com/selenium/upload1/");
+        page.setInputFiles("//input[@type='file']",
+                Paths.get("C:\\Users\\Asus\\Downloads\\FY! GG.jpg"));
+        page.close();
+        browser.close();
+        playwright.close();
+    }
 }
