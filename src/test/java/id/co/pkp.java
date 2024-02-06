@@ -1,7 +1,10 @@
 package id.co;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.microsoft.playwright.Dialog;
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.RequestOptions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.testng.Assert;
@@ -12,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.testng.AssertJUnit.assertEquals;
@@ -663,6 +667,28 @@ public class pkp {
         int status = response.status();
         System.out.println(status);
         assertEquals(status, 200);
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Post API Request using Playwright Java")
+    public void postAPIRequestTest() {
+        Playwright playwright = Playwright.create();
+        APIRequestContext request = playwright.request().newContext();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        HashMap<String, String> data = new HashMap<>();
+        data.put("name", "Naruto");
+        data.put("job", "Ninja");
+
+        String response = request.post("https://reqres.in/api/users", RequestOptions.create().setData(data)).text();
+
+        System.out.println(response);
+        JsonObject j = new Gson().fromJson(response, JsonObject.class);
+        System.out.println(j.get("name"));
 
         page.close();
         browser.close();
