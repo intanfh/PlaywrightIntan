@@ -746,12 +746,9 @@ public class pkp {
     public void deleteAPIRequestTest() {
         Playwright playwright = Playwright.create();
         APIRequestContext request = playwright.request().newContext();
-
         Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
         Page page = browser.newPage();
-
         HashMap<String, String> data = new HashMap<>();
-
         data.put("name", "Sasuke");
         data.put("job", "Uchiha");
 
