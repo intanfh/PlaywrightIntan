@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import static org.testng.AssertJUnit.assertEquals;
+
 
 public class pkp {
     @Test
@@ -645,6 +647,22 @@ public class pkp {
         page.waitForLoadState();
         System.out.println(page.locator("#uploaded-files").textContent());
         page.pause();
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Get API Request using Playwright Java")
+    public void getAPIRequestTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        Response response = page.navigate("https://reqres.in/api/users?page=2");
+        int status = response.status();
+        System.out.println(status);
+        assertEquals(status, 200);
 
         page.close();
         browser.close();
